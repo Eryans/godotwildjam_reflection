@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://54lvr6ploi7a"
-path="res://.godot/imported/map.glb-132d5a8ad3e29caa12188bd8e086cb2c.scn"
+uid="uid://cx6uqfnjenqia"
+path="res://.godot/imported/props.glb-c91db1418bbf4c93c98bc2d0256589d6.scn"
 
 [deps]
 
-source_file="res://game/source/map.glb"
-dest_files=["res://.godot/imported/map.glb-132d5a8ad3e29caa12188bd8e086cb2c.scn"]
+source_file="res://game/source/props.glb"
+dest_files=["res://.godot/imported/props.glb-c91db1418bbf4c93c98bc2d0256589d6.scn"]
 
 [params]
 
@@ -32,18 +32,15 @@ animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
-"materials": {
-"Material.001": {
-"use_external/enabled": true,
-"use_external/path": "res://game/source/materials/Material.001.tres"
-},
-"Material.002": {
-"use_external/enabled": true,
-"use_external/path": "res://game/source/materials/Material.002.tres"
-},
-"Material.003": {
-"use_external/enabled": true,
-"use_external/path": "res://game/source/materials/Material.003.tres"
+"meshes": {
+"props_Door": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://game/Meshes/props_Door.res"
 }
 }
 }

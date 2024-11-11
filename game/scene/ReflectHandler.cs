@@ -17,6 +17,10 @@ public partial class ReflectHandler : Marker3D
 	private Area3D _area3D;
 	public override void _Ready()
 	{
+		if (!IsInstanceValid(Player))
+		{
+			Player = GetTree().Root.GetChild(0).GetNode<Player>("Player");
+		}
 		_area3D = GetNode<Area3D>("Area3D");
 		_area3D.BodyEntered += OnAreaEnteredByBody;
 		_area3D.BodyExited += OnAreaLeavedByBody;
@@ -82,6 +86,7 @@ public partial class ReflectHandler : Marker3D
 	{
 		if (body is Player && !IsInstanceValid(_reflection))
 		{
+			GD.Print("Player enter reflect zone");
 			_reflection = new CharacterBody3D();
 			_reflection.AddChild(Player.GetNode<Node3D>("character").Duplicate());
 			_reflection.AddChild(Player.GetNode<Node3D>("CollisionShape3D").Duplicate());

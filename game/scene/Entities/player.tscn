@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgv4burxdvsy0"]
+
+[ext_resource type="Script" path="res://game/scene/Player.cs" id="1_1y8vk"]
+[ext_resource type="PackedScene" uid="uid://djm8s26kmhhlk" path="res://game/source/character.glb" id="2_rb1u7"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jr3c2"]
+radius = 0.318335
+height = 2.7829
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_1y8vk")
+
+[node name="character" parent="." instance=ExtResource("2_rb1u7")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="character"]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -1.49461, 0.684078, 0.474529)
+light_energy = 10.661
+light_indirect_energy = 4.925
+light_volumetric_fog_energy = 1.906
+spot_range = 34.6481
+spot_attenuation = 0.25
+spot_angle = 19.4623
+spot_angle_attenuation = 12.9961
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_jr3c2")
+
+[editable path="character"]

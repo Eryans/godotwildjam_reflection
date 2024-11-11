@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bwd7km1k4up4x"]
+
+[node name="PlayerSpawnMarker" type="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 1.5, -1)

@@ -1,61 +1,29 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4lpbqtladpy1"]
+[gd_scene load_steps=11 format=3 uid="uid://b4lpbqtladpy1"]
 
-[ext_resource type="PackedScene" uid="uid://54lvr6ploi7a" path="res://game/source/map.glb" id="1_ytn6h"]
-[ext_resource type="Script" path="res://game/scene/Player.cs" id="2_gy3g3"]
-[ext_resource type="PackedScene" uid="uid://djm8s26kmhhlk" path="res://game/source/character.glb" id="3_idy8w"]
+[ext_resource type="PackedScene" uid="uid://cgv4burxdvsy0" path="res://game/scene/Entities/player.tscn" id="1_r3gcx"]
 [ext_resource type="PackedScene" uid="uid://clggo26rtudot" path="res://game/scene/Managers/ReflectManager.tscn" id="4_ibuwh"]
+[ext_resource type="PackedScene" uid="uid://bh0tmvmx5eeme" path="res://game/scene/levels/room_1.tscn" id="4_t6jri"]
+[ext_resource type="PackedScene" uid="uid://54lvr6ploi7a" path="res://game/source/map.glb" id="5_cocr5"]
 [ext_resource type="PackedScene" uid="uid://boa3sak2nblxy" path="res://game/scene/Tools/FollowCamera.tscn" id="5_umar1"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jr3c2"]
-radius = 0.318335
-height = 2.7829
+[ext_resource type="Script" path="res://game/scene/HideEditor.cs" id="6_nfkot"]
+[ext_resource type="PackedScene" uid="uid://cu3wbveksbt0x" path="res://game/scene/Tools/room_teleport.tscn" id="7_a2f6e"]
 
 [sub_resource type="Environment" id="Environment_jua47"]
+ambient_light_source = 2
+ambient_light_color = Color(0.0776012, 0.0861692, 0.0926369, 1)
+ambient_light_energy = 2.41
 ssao_enabled = true
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_5toxr"]
+flip_faces = true
 
-[node name="map" parent="." instance=ExtResource("1_ytn6h")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_igy08"]
+albedo_color = Color(0.761438, 0.659, 0.614273, 1)
 
-[node name="map4" parent="." instance=ExtResource("1_ytn6h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 0)
+[node name="main" type="Node3D"]
 
-[node name="map2" parent="." instance=ExtResource("1_ytn6h")]
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, -26)
-
-[node name="map3" parent="." instance=ExtResource("1_ytn6h")]
-transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 32, 0, -26)
-
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.78555, 1.58792, -14.2232)
-script = ExtResource("2_gy3g3")
-
-[node name="character" parent="Player" instance=ExtResource("3_idy8w")]
-transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("CapsuleShape3D_jr3c2")
-
-[node name="OmniLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 6, 9, -4)
-shadow_enabled = true
-
-[node name="ReflectManager" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_ibuwh")]
-Player = NodePath("../Player")
-
-[node name="ReflectHandler" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_ibuwh")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.035553, 1.72192, -26.0002)
-Player = NodePath("../Player")
-ReflectedAxes = 1
-
-[node name="ReflectManager2" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_ibuwh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0356, 1.72192, -26.0002)
-Player = NodePath("../Player")
-ReflectedAxes = 1
-
-[node name="ReflectManager3" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_ibuwh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0356, 1.72192, -0.000152588)
-Player = NodePath("../Player")
+[node name="Player" parent="." instance=ExtResource("1_r3gcx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08942, 1.58792, 5.83856)
 
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("5_umar1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1945, 0, 0)
@@ -66,8 +34,44 @@ LookAroundSpeed = 0.003
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jua47")
 
-[editable path="map"]
-[editable path="map4"]
-[editable path="map2"]
-[editable path="map3"]
-[editable path="Player/character"]
+[node name="LevelContainer" type="Node3D" parent="."]
+
+[node name="ReflectManager" parent="LevelContainer" instance=ExtResource("4_ibuwh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035553, 1.72192, -8.05296)
+ReflectedAxes = 1
+
+[node name="CollisionShape3D" parent="LevelContainer/ReflectManager/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0465393, -0.34814, -3.22348)
+
+[node name="Room 1" parent="LevelContainer" instance=ExtResource("4_t6jri")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 58.802)
+
+[node name="ReflectManager" parent="LevelContainer/Room 1" node_paths=PackedStringArray("Player") instance=ExtResource("4_ibuwh")]
+Player = NodePath("../../../Player")
+
+[node name="CollisionShape3D" parent="LevelContainer/Room 1/ReflectManager/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.55503, -1.12646, -0.916725)
+
+[node name="map" parent="LevelContainer" instance=ExtResource("5_cocr5")]
+
+[node name="Ceiling" type="MeshInstance3D" parent="LevelContainer"]
+transform = Transform3D(74.6947, 0, 0, 0, 74.6947, 0, 0, 0, 74.6947, 0, 4.76067, 0)
+visible = false
+mesh = SubResource("PlaneMesh_5toxr")
+surface_material_override/0 = SubResource("StandardMaterial3D_igy08")
+script = ExtResource("6_nfkot")
+
+[node name="Doors" type="Node" parent="LevelContainer"]
+
+[node name="ARoomTeleport" parent="LevelContainer/Doors" node_paths=PackedStringArray("Player", "Target") instance=ExtResource("7_a2f6e")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 25, 1.67835, 2.28892)
+Player = NodePath("../../../Player")
+Target = NodePath("../BRoomTeleport")
+
+[node name="BRoomTeleport" parent="LevelContainer/Doors" node_paths=PackedStringArray("Player", "Target") instance=ExtResource("7_a2f6e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1.67835, 68.6749)
+Player = NodePath("../../../Player")
+Target = NodePath("../ARoomTeleport")
+
+[editable path="LevelContainer/ReflectManager"]
+[editable path="LevelContainer/Room 1/ReflectManager"]

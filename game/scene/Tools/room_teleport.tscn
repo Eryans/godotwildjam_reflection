@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu3wbveksbt0x"]
+
+[ext_resource type="Script" path="res://RoomTeleport.cs" id="1_vbrci"]
+[ext_resource type="ArrayMesh" uid="uid://drlgq43rbipgs" path="res://game/Meshes/props_Door.res" id="2_jvbs5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xm8u7"]
+size = Vector3(1.98041, 3.44183, 1.72168)
+
+[node name="RoomTeleport" type="Node3D"]
+script = ExtResource("1_vbrci")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_jvbs5")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.356354, 0.0508728, -0.36084)
+shape = SubResource("BoxShape3D_xm8u7")
+
+[node name="Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.377581, 0.931142, -1.85162)
