@@ -26,7 +26,7 @@ public partial class ReflectHandler : Marker3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Player != null)
+		if (IsInstanceValid(Player) && IsInstanceValid(_reflection))
 		{
 			HandleReflectVelocity();
 		}
@@ -64,7 +64,7 @@ public partial class ReflectHandler : Marker3D
 
 	private void OnAreaEnteredByBody(Node3D body)
 	{
-		if (body is Player)
+		if (body is Player && !IsInstanceValid(_reflection))
 		{
 			_reflection = new CharacterBody3D();
 			_reflection.AddChild(Player.GetNode<Node3D>("character").Duplicate());
@@ -76,6 +76,10 @@ public partial class ReflectHandler : Marker3D
 
 	private void OnAreaLeavedByBody(Node3D body)
 	{
-		_reflection.QueueFree();
+		if (IsInstanceValid(_reflection))
+		{
+			_reflection.QueueFree();
+			_reflection = null;
+		}
 	}
 }
