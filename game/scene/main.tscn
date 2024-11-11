@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4lpbqtladpy1"]
+[gd_scene load_steps=8 format=3 uid="uid://b4lpbqtladpy1"]
 
 [ext_resource type="PackedScene" uid="uid://54lvr6ploi7a" path="res://game/source/map.glb" id="1_ytn6h"]
 [ext_resource type="Script" path="res://game/scene/Player.cs" id="2_gy3g3"]
@@ -9,6 +9,9 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jr3c2"]
 radius = 0.318335
 height = 2.7829
+
+[sub_resource type="Environment" id="Environment_jua47"]
+ssao_enabled = true
 
 [node name="Node3D" type="Node3D"]
 
@@ -24,7 +27,7 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, -2
 transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 32, 0, -26)
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.78555, 5.02309, -14.2232)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.78555, 1.58792, -14.2232)
 script = ExtResource("2_gy3g3")
 
 [node name="character" parent="Player" instance=ExtResource("3_idy8w")]
@@ -58,6 +61,10 @@ Player = NodePath("../Player")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1945, 0, 0)
 Target = NodePath("../Player")
 Offset = Vector3(0, 1, 0)
+LookAroundSpeed = 0.003
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jua47")
 
 [editable path="map"]
 [editable path="map4"]

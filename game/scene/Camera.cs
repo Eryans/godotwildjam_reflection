@@ -11,8 +11,11 @@ public partial class Camera : SpringArm3D
 	public bool ApplyCameraRotationToTarget = true;
 	[Export]
 	public float LookAroundSpeed = 0.005f;
+	[Export]
+	public float ZoomSpeed = 5f;
 
 	private Transform3D targetTransform;
+	private Camera3D camera;
 	private float _rotationX = 0f;
 	private float _rotationY = 0f;
 	public override void _Ready()
@@ -22,7 +25,16 @@ public partial class Camera : SpringArm3D
 
 	public override void _Process(double delta)
 	{
+		camera = GetNode<Camera3D>("Camera3D");
+		if (Input.IsActionPressed("r_mouse"))
+		{
+			camera.Fov = Mathf.Lerp(camera.Fov, 25, (float)delta * ZoomSpeed);
+		}
+		else
+		{
+			camera.Fov = Mathf.Lerp(camera.Fov, 75, (float)delta);
 
+		}
 		if (IsInstanceValid(Target))
 		{
 			Transform3D localTransform = Transform;
