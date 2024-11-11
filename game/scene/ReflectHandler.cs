@@ -48,7 +48,15 @@ public partial class ReflectHandler : Marker3D
 	private void HandleBasis()
 	{
 		Node3D reflectionMesh = _reflection.GetNode<Node3D>("character");
-		reflectionMesh.Scale = new Vector3(-1, 1, 1);
+		if (ReflectedAxes == ReflectedAxesEnum.X)
+		{
+			reflectionMesh.Scale = new Vector3(-1, 1, 1);
+		}
+		else if (ReflectedAxes == ReflectedAxesEnum.Z)
+		{
+			reflectionMesh.Scale = new Vector3(1, 1, -1);
+
+		}
 		_reflection.Rotation = -Player.Rotation;
 	}
 
