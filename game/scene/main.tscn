@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4lpbqtladpy1"]
+
+[ext_resource type="PackedScene" uid="uid://54lvr6ploi7a" path="res://game/source/map.glb" id="1_ytn6h"]
+[ext_resource type="Script" path="res://game/scene/Player.cs" id="2_gy3g3"]
+[ext_resource type="PackedScene" uid="uid://djm8s26kmhhlk" path="res://game/source/character.glb" id="3_idy8w"]
+[ext_resource type="Script" path="res://game/scene/ReflectHandler.cs" id="4_c6fuq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jr3c2"]
+height = 2.7829
+
+[node name="Node3D" type="Node3D"]
+
+[node name="map" parent="." instance=ExtResource("1_ytn6h")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.693477, 0.720479, 0, -0.720479, 0.693477, 0.0361214, 7.4975, 11.7276)
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97913, 1.3626, -4.44155)
+script = ExtResource("2_gy3g3")
+
+[node name="character" parent="Player" instance=ExtResource("3_idy8w")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_jr3c2")
+
+[node name="ReflectHandler" type="Marker3D" parent="." node_paths=PackedStringArray("Player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035553, 1.72192, -0.000152588)
+script = ExtResource("4_c6fuq")
+Player = NodePath("../Player")
+
+[node name="OmniLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 6, 9, -4)
+
+[editable path="map"]
+[editable path="Player/character"]
