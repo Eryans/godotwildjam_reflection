@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4lpbqtladpy1"]
+[gd_scene load_steps=7 format=3 uid="uid://b4lpbqtladpy1"]
 
 [ext_resource type="PackedScene" uid="uid://54lvr6ploi7a" path="res://game/source/map.glb" id="1_ytn6h"]
 [ext_resource type="Script" path="res://game/scene/Player.cs" id="2_gy3g3"]
@@ -8,6 +8,9 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jr3c2"]
 height = 2.7829
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ycj1h"]
+size = Vector3(20.0269, 3.25293, 20.0737)
+
 [node name="Node3D" type="Node3D"]
 
 [node name="map" parent="." instance=ExtResource("1_ytn6h")]
@@ -16,7 +19,7 @@ height = 2.7829
 transform = Transform3D(1, 0, 0, 0, 0.693477, 0.720479, 0, -0.720479, 0.693477, 0.0361214, 7.4975, 11.7276)
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97913, 1.3626, -4.44155)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.97913, 0.541721, -13.4416)
 script = ExtResource("2_gy3g3")
 
 [node name="character" parent="Player" instance=ExtResource("3_idy8w")]
@@ -28,6 +31,12 @@ shape = SubResource("CapsuleShape3D_jr3c2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035553, 1.72192, -0.000152588)
 script = ExtResource("4_c6fuq")
 Player = NodePath("../Player")
+
+[node name="Area3D" type="Area3D" parent="ReflectHandler"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReflectHandler/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0465393, -1.12646, 0.0275879)
+shape = SubResource("BoxShape3D_ycj1h")
 
 [node name="OmniLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 6, 9, -4)

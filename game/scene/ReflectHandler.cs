@@ -4,7 +4,7 @@ using System;
 public partial class ReflectHandler : Marker3D
 {
 	[Export]
-	public CharacterBody3D Player { get; set; }
+	public Player Player { get; set; }
 	public enum ReflectedAxesEnum
 	{
 		X,
@@ -12,20 +12,15 @@ public partial class ReflectHandler : Marker3D
 	}
 	[Export]
 	public ReflectedAxesEnum ReflectedAxes { get; set; }
+
 	private CharacterBody3D _reflection;
-	private const float _speed = 5.0f;
-
-
+	private Area3D _area3D;
 	public override void _Ready()
 	{
-		if (Player != null)
-		{
-			_reflection = new CharacterBody3D();
-			_reflection.CallDeferred("add_child", Player.GetNode<Node3D>("character").Duplicate());
-			_reflection.CallDeferred("add_child", Player.GetNode<Node3D>("CollisionShape3D").Duplicate());
-			SetupReflectTransform();
-			GetTree().Root.CallDeferred("add_child", _reflection);
-		}
+		_area3D = GetNode<Area3D>("Area3D");
+		_area3D.BodyEntered += OnAreaEnteredByBody;
+		_area3D.BodyExited += OnAreaLeavedByBody;
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -67,4 +62,20 @@ public partial class ReflectHandler : Marker3D
 		_reflection.MoveAndSlide();
 	}
 
+	private void OnAreaEnteredByBody(Node3D body)
+	{
+		if (body is Player)
+		{
+			_reflection = new CharacterBody3D();
+			_reflection.AddChild(Player.GetNode<Node3D>("character").Duplicate());
+			_reflection.AddChild(Player.GetNode<Node3D>("CollisionShape3D").Duplicate());
+			SetupReflectTransform();
+			GetTree().Root.AddChild(_reflection);
+		}
+	}
+
+	private void OnAreaLeavedByBody(Node3D body)
+	{
+		_reflection.QueueFree();
+	}
 }
