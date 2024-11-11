@@ -1,11 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4lpbqtladpy1"]
+[gd_scene load_steps=7 format=3 uid="uid://b4lpbqtladpy1"]
 
 [ext_resource type="PackedScene" uid="uid://54lvr6ploi7a" path="res://game/source/map.glb" id="1_ytn6h"]
 [ext_resource type="Script" path="res://game/scene/Player.cs" id="2_gy3g3"]
 [ext_resource type="PackedScene" uid="uid://djm8s26kmhhlk" path="res://game/source/character.glb" id="3_idy8w"]
 [ext_resource type="PackedScene" uid="uid://clggo26rtudot" path="res://game/scene/Managers/ReflectManager.tscn" id="4_ibuwh"]
+[ext_resource type="PackedScene" uid="uid://boa3sak2nblxy" path="res://game/scene/Tools/FollowCamera.tscn" id="5_umar1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jr3c2"]
+radius = 0.318335
 height = 2.7829
 
 [node name="Node3D" type="Node3D"]
@@ -21,20 +23,19 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0, -2
 [node name="map3" parent="." instance=ExtResource("1_ytn6h")]
 transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 32, 0, -26)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 15.036, 13.413, 11.908)
-
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.97913, 0.541721, -13.4416)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.78555, 5.02309, -14.2232)
 script = ExtResource("2_gy3g3")
 
 [node name="character" parent="Player" instance=ExtResource("3_idy8w")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 shape = SubResource("CapsuleShape3D_jr3c2")
 
 [node name="OmniLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 6, 9, -4)
+shadow_enabled = true
 
 [node name="ReflectManager" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_ibuwh")]
 Player = NodePath("../Player")
@@ -52,6 +53,11 @@ ReflectedAxes = 1
 [node name="ReflectManager3" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_ibuwh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.0356, 1.72192, -0.000152588)
 Player = NodePath("../Player")
+
+[node name="FollowCamera" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("5_umar1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1945, 0, 0)
+Target = NodePath("../Player")
+Offset = Vector3(0, 1, 0)
 
 [editable path="map"]
 [editable path="map4"]
