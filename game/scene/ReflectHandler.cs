@@ -36,11 +36,11 @@ public partial class ReflectHandler : Marker3D
 		var transform = Player.Transform;
 		if (ReflectedAxes == ReflectedAxesEnum.X)
 		{
-			transform.Origin.X = Transform.Origin.X - Player.Transform.Origin.X;
+			transform.Origin.X = 2 * Transform.Origin.X - Player.Transform.Origin.X;
 		}
 		else if (ReflectedAxes == ReflectedAxesEnum.Z)
 		{
-			transform.Origin.Z = Transform.Origin.Z - Player.Transform.Origin.Z;
+			transform.Origin.Z = 2 * Transform.Origin.Z - Player.Transform.Origin.Z;
 		}
 		_reflection.Transform = transform;
 	}

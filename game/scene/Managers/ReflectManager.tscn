@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://clggo26rtudot"]
+
+[ext_resource type="Script" path="res://game/scene/ReflectHandler.cs" id="1_r0uku"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ycj1h"]
+size = Vector3(20.0269, 3.25293, 20.0737)
+
+[node name="ReflectManager" type="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035553, 1.72192, -0.000152588)
+script = ExtResource("1_r0uku")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0465393, -1.12646, 0.0275879)
+shape = SubResource("BoxShape3D_ycj1h")
