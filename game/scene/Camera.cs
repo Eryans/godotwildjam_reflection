@@ -8,7 +8,7 @@ public partial class Camera : SpringArm3D
 	[Export]
 	public Vector3 Offset;
 	[Export]
-	public bool ApplyBasisToTarget = true;
+	public bool ApplyCameraRotationToTarget = true;
 	[Export]
 	public float LookAroundSpeed = 0.005f;
 
@@ -28,7 +28,7 @@ public partial class Camera : SpringArm3D
 			Transform3D localTransform = Transform;
 			localTransform.Origin = Target.Transform.Origin + Offset;
 			Transform = localTransform;
-			if (ApplyBasisToTarget)
+			if (ApplyCameraRotationToTarget)
 			{
 				Target.Rotation = new Vector3(Target.Rotation.X, Rotation.Y, Target.Rotation.Z);
 			}
