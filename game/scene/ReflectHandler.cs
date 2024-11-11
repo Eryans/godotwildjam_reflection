@@ -29,6 +29,7 @@ public partial class ReflectHandler : Marker3D
 		if (IsInstanceValid(Player) && IsInstanceValid(_reflection))
 		{
 			HandleReflectVelocity();
+			HandleBasis();
 		}
 	}
 	private void SetupReflectTransform()
@@ -44,9 +45,16 @@ public partial class ReflectHandler : Marker3D
 		}
 		_reflection.Transform = transform;
 	}
+	private void HandleBasis()
+	{
+		Node3D reflectionMesh = _reflection.GetNode<Node3D>("character");
+		reflectionMesh.Scale = new Vector3(-1, 1, 1);
+		_reflection.Rotation = -Player.Rotation;
+	}
+
 	private void HandleReflectVelocity()
 	{
-		var playerVelocity = Player.Velocity;
+		Vector3 playerVelocity = Player.Velocity;
 		Vector3 inversedAxes = new(playerVelocity.X, playerVelocity.Y, playerVelocity.Z);
 		if (ReflectedAxes == ReflectedAxesEnum.X)
 		{
