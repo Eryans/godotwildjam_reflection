@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgv4burxdvsy0"]
+[gd_scene load_steps=5 format=3 uid="uid://cgv4burxdvsy0"]
 
 [ext_resource type="Script" path="res://game/scene/Player.cs" id="1_1y8vk"]
 [ext_resource type="PackedScene" uid="uid://djm8s26kmhhlk" path="res://game/source/character.glb" id="2_rb1u7"]
+[ext_resource type="PackedScene" uid="uid://3heyfw224wdb" path="res://game/scene/Entities/projectile_launcher.tscn" id="2_y8gsr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jr3c2"]
 radius = 0.318335
@@ -9,6 +10,8 @@ height = 2.7829
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_1y8vk")
+
+[node name="ProjectileLauncher" parent="." instance=ExtResource("2_y8gsr")]
 
 [node name="character" parent="." instance=ExtResource("2_rb1u7")]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0)

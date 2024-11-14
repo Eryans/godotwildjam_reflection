@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://xubllfkldcvw"]
+
+[ext_resource type="Script" path="res://game/scene/Entities/FireBall.cs" id="1_kdk7t"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dkjve"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_jq70i"]
+
+[node name="FireBall" type="CharacterBody3D"]
+motion_mode = 1
+script = ExtResource("1_kdk7t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_dkjve")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_jq70i")
+skeleton = NodePath("../..")

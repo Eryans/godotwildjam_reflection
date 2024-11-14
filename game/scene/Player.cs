@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Runtime.ExceptionServices;
 
 public partial class Player : CharacterBody3D
 {
@@ -30,5 +31,17 @@ public partial class Player : CharacterBody3D
 
 		Velocity = velocity;
 		MoveAndSlide();
+
+		for (int i = 0; i < GetSlideCollisionCount(); i++)
+		{
+			KinematicCollision3D collision = GetSlideCollision(i);
+			var body = collision.GetCollider();
+			if (body is RigidBody3D rb)
+			{
+				Vector3 pushDirection = rb.Transform.Origin - Transform.Origin;
+				rb.ApplyCentralForce(new Vector3(pushDirection.X, rb.Transform.Origin.Y, pushDirection.Z).Normalized() * 50);
+			}
+		}
+
 	}
 }

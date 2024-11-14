@@ -1,13 +1,29 @@
-[gd_scene load_steps=7 format=3 uid="uid://ilk2tr0cqbr1"]
+[gd_scene load_steps=15 format=3 uid="uid://ilk2tr0cqbr1"]
 
 [ext_resource type="PackedScene" uid="uid://boa3sak2nblxy" path="res://game/scene/Tools/FollowCamera.tscn" id="1_lrc16"]
 [ext_resource type="PackedScene" uid="uid://cgv4burxdvsy0" path="res://game/scene/Entities/player.tscn" id="2_m14vn"]
 [ext_resource type="PackedScene" uid="uid://clggo26rtudot" path="res://game/scene/Managers/ReflectManager.tscn" id="3_ox7vu"]
 [ext_resource type="PackedScene" uid="uid://cl5kosycnd3s7" path="res://game/source/room_1.glb" id="4_op6pp"]
+[ext_resource type="Script" path="res://CollisionTrigger.cs" id="5_dyb71"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_a1uf2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5lyoq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a3h5x"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dq2h1"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vlp62"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6aidu"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wru3e"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3xvjg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_aiiwh"]
+radius = 1.40925
 
 [node name="Node3D" type="Node3D"]
 
@@ -28,13 +44,47 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0640368, -2.26806, 0.01369
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.0249905, -0.999688, 0, 0.893695, 0.0223409, 0.448118, -0.447978, -0.0111987, 0.893974, 0, 18.3489, 0)
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="Prop" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.98222, 7.13, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prop"]
 mesh = SubResource("BoxMesh_a1uf2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prop"]
 shape = SubResource("BoxShape3D_5lyoq")
+
+[node name="Prop2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.98222, 7.13, -3.54029)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prop2"]
+mesh = SubResource("CapsuleMesh_a3h5x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prop2"]
+shape = SubResource("CapsuleShape3D_dq2h1")
+
+[node name="Prop3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64508, 7.13, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prop3"]
+mesh = SubResource("CylinderMesh_vlp62")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prop3"]
+shape = SubResource("CylinderShape3D_6aidu")
+
+[node name="Prop4" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0346, 7.13, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prop4"]
+mesh = SubResource("SphereMesh_wru3e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prop4"]
+shape = SubResource("SphereShape3D_3xvjg")
+
+[node name="CollisionTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.64075, 0, 0)
+script = ExtResource("5_dyb71")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionTrigger"]
+shape = SubResource("SphereShape3D_aiiwh")
 
 [editable path="ReflectManager"]

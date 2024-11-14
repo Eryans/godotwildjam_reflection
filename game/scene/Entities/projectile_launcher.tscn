@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://3heyfw224wdb"]
+
+[ext_resource type="Script" path="res://ProjectileLauncher.cs" id="1_r385n"]
+
+[node name="ProjectileLauncher" type="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.651773, -0.43417)
+script = ExtResource("1_r385n")

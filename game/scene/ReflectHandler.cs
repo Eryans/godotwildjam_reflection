@@ -17,13 +17,13 @@ public partial class ReflectHandler : Marker3D
 
 	private CharacterBody3D _reflection;
 	private Area3D _area3D;
-	private Player _player { get; set; }
+	private Player _player;
 	private List<ReflectPair> _props = new();
 	public override void _Ready()
 	{
 		if (!IsInstanceValid(_player))
 		{
-			_player = GetTree().Root.GetChild(0).GetNode<Player>("Player");
+			_player = GetTree().Root.GetChild(1).GetNode<Player>("Player");
 		}
 		_area3D = GetNode<Area3D>("Area3D");
 		_area3D.BodyEntered += OnAreaEnteredByBody;
@@ -41,8 +41,27 @@ public partial class ReflectHandler : Marker3D
 		}
 		foreach (var rb in _props)
 		{
+			HandleReflectTransformAndBasisForProp(rb.Original, rb.Reflect);
 		}
 	}
+
+	private void HandleReflectTransformAndBasisForProp(Node3D originalProp, Node3D reflection)
+	{
+		var transform = originalProp.Transform;
+		if (ReflectedAxes == ReflectedAxesEnum.X)
+		{
+			transform.Origin.X = 2 * Transform.Origin.X - originalProp.Transform.Origin.X;
+			reflection.Scale = new Vector3(-1, 1, 1);
+		}
+		else if (ReflectedAxes == ReflectedAxesEnum.Z)
+		{
+			transform.Origin.Z = 2 * Transform.Origin.Z - originalProp.Transform.Origin.Z;
+			reflection.Scale = new Vector3(1, 1, -1);
+		}
+		reflection.Rotation = -originalProp.Rotation;
+		reflection.Transform = transform;
+	}
+
 	private void SetupReflectTransform(Node3D originalProp, Node3D reflection)
 	{
 		var transform = originalProp.Transform;
@@ -104,7 +123,6 @@ public partial class ReflectHandler : Marker3D
 		{
 			if (_props.FirstOrDefault(p => p.Id == prop.Name) == null)
 			{
-
 				RigidBody3D propReflect = (RigidBody3D)prop.Duplicate();
 				SetupReflectTransform(prop, propReflect);
 				GetTree().Root.AddChild(propReflect);
