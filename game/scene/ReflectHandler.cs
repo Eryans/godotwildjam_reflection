@@ -1,10 +1,12 @@
 using Godot;
+using Godot.Collections;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class ReflectHandler : Marker3D
 {
-	[Export]
-	public Player Player { get; set; }
+
 	public enum ReflectedAxesEnum
 	{
 		X,
@@ -15,11 +17,13 @@ public partial class ReflectHandler : Marker3D
 
 	private CharacterBody3D _reflection;
 	private Area3D _area3D;
+	private Player _player { get; set; }
+	private List<ReflectPair> _props = new();
 	public override void _Ready()
 	{
-		if (!IsInstanceValid(Player))
+		if (!IsInstanceValid(_player))
 		{
-			Player = GetTree().Root.GetChild(0).GetNode<Player>("Player");
+			_player = GetTree().Root.GetChild(0).GetNode<Player>("Player");
 		}
 		_area3D = GetNode<Area3D>("Area3D");
 		_area3D.BodyEntered += OnAreaEnteredByBody;
@@ -30,24 +34,27 @@ public partial class ReflectHandler : Marker3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (IsInstanceValid(Player) && IsInstanceValid(_reflection))
+		if (IsInstanceValid(_player) && IsInstanceValid(_reflection))
 		{
 			HandleReflectVelocity();
 			HandleBasis();
 		}
+		foreach (var rb in _props)
+		{
+		}
 	}
-	private void SetupReflectTransform()
+	private void SetupReflectTransform(Node3D originalProp, Node3D reflection)
 	{
-		var transform = Player.Transform;
+		var transform = originalProp.Transform;
 		if (ReflectedAxes == ReflectedAxesEnum.X)
 		{
-			transform.Origin.X = 2 * Transform.Origin.X - Player.Transform.Origin.X;
+			transform.Origin.X = 2 * Transform.Origin.X - originalProp.Transform.Origin.X;
 		}
 		else if (ReflectedAxes == ReflectedAxesEnum.Z)
 		{
-			transform.Origin.Z = 2 * Transform.Origin.Z - Player.Transform.Origin.Z;
+			transform.Origin.Z = 2 * Transform.Origin.Z - originalProp.Transform.Origin.Z;
 		}
-		_reflection.Transform = transform;
+		reflection.Transform = transform;
 	}
 	private void HandleBasis()
 	{
@@ -61,12 +68,12 @@ public partial class ReflectHandler : Marker3D
 			reflectionMesh.Scale = new Vector3(1, 1, -1);
 
 		}
-		_reflection.Rotation = -Player.Rotation;
+		_reflection.Rotation = -_player.Rotation;
 	}
 
 	private void HandleReflectVelocity()
 	{
-		Vector3 playerVelocity = Player.Velocity;
+		Vector3 playerVelocity = _player.Velocity;
 		Vector3 inversedAxes = new(playerVelocity.X, playerVelocity.Y, playerVelocity.Z);
 		if (ReflectedAxes == ReflectedAxesEnum.X)
 		{
@@ -88,19 +95,47 @@ public partial class ReflectHandler : Marker3D
 		{
 			GD.Print("Player enter reflect zone");
 			_reflection = new CharacterBody3D();
-			_reflection.AddChild(Player.GetNode<Node3D>("character").Duplicate());
-			_reflection.AddChild(Player.GetNode<Node3D>("CollisionShape3D").Duplicate());
-			SetupReflectTransform();
+			_reflection.AddChild(_player.GetNode<Node3D>("character").Duplicate());
+			_reflection.AddChild(_player.GetNode<Node3D>("CollisionShape3D").Duplicate());
+			SetupReflectTransform(_player, _reflection);
 			GetTree().Root.AddChild(_reflection);
+		}
+		if (body is RigidBody3D prop)
+		{
+			if (_props.FirstOrDefault(p => p.Id == prop.Name) == null)
+			{
+
+				RigidBody3D propReflect = (RigidBody3D)prop.Duplicate();
+				SetupReflectTransform(prop, propReflect);
+				GetTree().Root.AddChild(propReflect);
+				_props.Add(new ReflectPair(prop.Name, prop, propReflect));
+			}
 		}
 	}
 
 	private void OnAreaLeavedByBody(Node3D body)
 	{
-		if (IsInstanceValid(_reflection))
+		if (body is Player)
 		{
-			_reflection.QueueFree();
-			_reflection = null;
+			if (IsInstanceValid(_reflection))
+			{
+				_reflection.QueueFree();
+				_reflection = null;
+			}
 		}
+	}
+}
+
+public class ReflectPair
+{
+	public string Id { get; set; }
+	public RigidBody3D Original { get; set; }
+	public RigidBody3D Reflect { get; set; }
+
+	public ReflectPair(string id, RigidBody3D original, RigidBody3D reflect)
+	{
+		Id = id;
+		Original = original;
+		Reflect = reflect;
 	}
 }

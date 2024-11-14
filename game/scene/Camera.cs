@@ -5,8 +5,7 @@ public partial class Camera : SpringArm3D
 {
 	[Export]
 	public Node3D Target;
-	[Export]
-	public Vector3 Offset;
+
 	[Export]
 	public bool ApplyCameraRotationToTarget = true;
 	[Export]
@@ -38,7 +37,7 @@ public partial class Camera : SpringArm3D
 		if (IsInstanceValid(Target))
 		{
 			Transform3D localTransform = Transform;
-			localTransform.Origin = Target.Transform.Origin + Offset;
+			localTransform.Origin = Target.Transform.Origin;
 			Transform = localTransform;
 			if (ApplyCameraRotationToTarget)
 			{

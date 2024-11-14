@@ -1,18 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bh0tmvmx5eeme"]
+[gd_scene load_steps=2 format=3 uid="uid://bh0tmvmx5eeme"]
 
 [ext_resource type="PackedScene" uid="uid://cl5kosycnd3s7" path="res://game/source/room_1.glb" id="2_fmfw5"]
-[ext_resource type="Texture2D" uid="uid://dfx3sborcnq8m" path="res://game/source/spooky.png" id="2_xgjrt"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_x7apl"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a4r4j"]
-albedo_texture = ExtResource("2_xgjrt")
 
 [node name="Room 1" type="Node3D"]
 
 [node name="room_1" parent="." instance=ExtResource("2_fmfw5")]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.82681, 0.47197, -2.06305e-08, 5.1445e-15, -8.24746e-08, -1.8868, -0.47197, -1.82681, 7.98526e-08, -2.3217, 2.4239, 4.5291)
-mesh = SubResource("PlaneMesh_x7apl")
-surface_material_override/0 = SubResource("StandardMaterial3D_a4r4j")

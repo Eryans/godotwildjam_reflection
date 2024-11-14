@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://ilk2tr0cqbr1"]
+
+[ext_resource type="PackedScene" uid="uid://boa3sak2nblxy" path="res://game/scene/Tools/FollowCamera.tscn" id="1_lrc16"]
+[ext_resource type="PackedScene" uid="uid://cgv4burxdvsy0" path="res://game/scene/Entities/player.tscn" id="2_m14vn"]
+[ext_resource type="PackedScene" uid="uid://clggo26rtudot" path="res://game/scene/Managers/ReflectManager.tscn" id="3_ox7vu"]
+[ext_resource type="PackedScene" uid="uid://cl5kosycnd3s7" path="res://game/source/room_1.glb" id="4_op6pp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_a1uf2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5lyoq"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="FollowCamera" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("1_lrc16")]
+Target = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("2_m14vn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5194, 2.30289, 0)
+
+[node name="ReflectManager" parent="." instance=ExtResource("3_ox7vu")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.62396e-05, 3.722, -1)
+
+[node name="CollisionShape3D" parent="ReflectManager/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0640368, -2.26806, 0.0136929)
+
+[node name="room_1" parent="." instance=ExtResource("4_op6pp")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.0249905, -0.999688, 0, 0.893695, 0.0223409, 0.448118, -0.447978, -0.0111987, 0.893974, 0, 18.3489, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.98222, 7.13, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_a1uf2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_5lyoq")
+
+[editable path="ReflectManager"]

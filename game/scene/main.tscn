@@ -28,7 +28,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08942, 1.58792, 5.83856)
 [node name="FollowCamera" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("5_umar1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1945, 0, 0)
 Target = NodePath("../Player")
-Offset = Vector3(0, 1, 0)
 LookAroundSpeed = 0.003
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -46,8 +45,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0465393, -0.34814, -3.2234
 [node name="Room 1" parent="LevelContainer" instance=ExtResource("4_t6jri")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 58.802)
 
-[node name="ReflectManager" parent="LevelContainer/Room 1" node_paths=PackedStringArray("Player") instance=ExtResource("4_ibuwh")]
-Player = NodePath("../../../Player")
+[node name="ReflectManager" parent="LevelContainer/Room 1" instance=ExtResource("4_ibuwh")]
 
 [node name="CollisionShape3D" parent="LevelContainer/Room 1/ReflectManager/Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.55503, -1.12646, -0.916725)
