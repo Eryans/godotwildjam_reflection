@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://ilk2tr0cqbr1"]
+[gd_scene load_steps=16 format=3 uid="uid://ilk2tr0cqbr1"]
 
-[ext_resource type="PackedScene" uid="uid://boa3sak2nblxy" path="res://game/scene/Tools/FollowCamera.tscn" id="1_lrc16"]
+[ext_resource type="Script" path="res://Controller.cs" id="1_7j6fq"]
 [ext_resource type="PackedScene" uid="uid://cgv4burxdvsy0" path="res://game/scene/Entities/player.tscn" id="2_m14vn"]
 [ext_resource type="PackedScene" uid="uid://clggo26rtudot" path="res://game/scene/Managers/ReflectManager.tscn" id="3_ox7vu"]
 [ext_resource type="PackedScene" uid="uid://cl5kosycnd3s7" path="res://game/source/room_1.glb" id="4_op6pp"]
+[ext_resource type="Script" path="res://TopViewCamera.cs" id="4_uolp5"]
 [ext_resource type="Script" path="res://CollisionTrigger.cs" id="5_dyb71"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_a1uf2"]
@@ -27,11 +28,14 @@ radius = 1.40925
 
 [node name="Node3D" type="Node3D"]
 
-[node name="FollowCamera" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("1_lrc16")]
-Target = NodePath("../Player")
+[node name="Controller" type="Node" parent="." node_paths=PackedStringArray("Player", "Camera")]
+script = ExtResource("1_7j6fq")
+Player = NodePath("../Player")
+Camera = NodePath("../ReflectManager/TopViewCamera")
 
-[node name="Player" parent="." instance=ExtResource("2_m14vn")]
+[node name="Player" parent="." node_paths=PackedStringArray("Camera") instance=ExtResource("2_m14vn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5194, 2.30289, 0)
+Camera = NodePath("../ReflectManager/TopViewCamera")
 
 [node name="ReflectManager" parent="." instance=ExtResource("3_ox7vu")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.62396e-05, 3.722, -1)
@@ -39,13 +43,17 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.6239
 [node name="CollisionShape3D" parent="ReflectManager/Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0640368, -2.26806, 0.0136929)
 
+[node name="TopViewCamera" type="Camera3D" parent="ReflectManager"]
+transform = Transform3D(-4.37114e-08, 0.965926, -0.258819, 0, 0.258819, 0.965926, 1, 4.2222e-08, -1.13133e-08, -5.496, 11.278, -3.64798e-05)
+script = ExtResource("4_uolp5")
+
 [node name="room_1" parent="." instance=ExtResource("4_op6pp")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.0249905, -0.999688, 0, 0.893695, 0.0223409, 0.448118, -0.447978, -0.0111987, 0.893974, 0, 18.3489, 0)
 
 [node name="Prop" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.98222, 7.13, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.728, 7.13, 0.545)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Prop"]
 mesh = SubResource("BoxMesh_a1uf2")
@@ -54,7 +62,7 @@ mesh = SubResource("BoxMesh_a1uf2")
 shape = SubResource("BoxShape3D_5lyoq")
 
 [node name="Prop2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.98222, 7.13, -3.54029)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.078, 7.13, -3.54)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Prop2"]
 mesh = SubResource("CapsuleMesh_a3h5x")
@@ -72,7 +80,7 @@ mesh = SubResource("CylinderMesh_vlp62")
 shape = SubResource("CylinderShape3D_6aidu")
 
 [node name="Prop4" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0346, 7.13, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.93, 7.13, 4.08)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Prop4"]
 mesh = SubResource("SphereMesh_wru3e")
