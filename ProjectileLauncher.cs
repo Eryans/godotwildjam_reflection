@@ -16,14 +16,14 @@ public partial class ProjectileLauncher : Marker3D
 		_shootingRateTimer.Start(ShootingRate);
 	}
 
-	public override void _Process(double delta)
+	public void Shoot()
 	{
-		if (Input.IsActionJustPressed("l_mouse") && _canShoot)
+		if (_canShoot)
 		{
 			_canShoot = false;
 			CharacterBody3D instance = (CharacterBody3D)_projectile.Instantiate();
 			instance.GlobalTransform = GlobalTransform;
-			GetTree().Root.AddChild(instance);
+			GetTree().Root.GetChild(1).AddChild(instance);
 			instance.GlobalBasis = GlobalBasis;
 		}
 	}

@@ -13,6 +13,8 @@ public partial class GlobalSignals : Node
 	public delegate void NPCDiesEventHandler(FireBall projectile);
 	[Signal]
 	public delegate void NPCAttackEventHandler(int attack);
+	[Signal]
+	public delegate void PlayerIsDeadEventHandler();
 
 	public override void _Ready()
 	{
@@ -37,5 +39,10 @@ public partial class GlobalSignals : Node
 	public void EmitNpcAttack(int attack)
 	{
 		EmitSignal(nameof(NPCAttack), attack);
+	}
+
+	public void EmitPlayerDead()
+	{
+		EmitSignal(nameof(PlayerIsDead));
 	}
 }

@@ -27,7 +27,10 @@ public partial class Npc : CharacterBody3D
 		_canAttackTimer.Start(AttackRate);
 		CallDeferred("SetupNavAgent");
 	}
-
+	public override void _ExitTree()
+	{
+		GlobalSignals.Instance.NPCHitByProjectile -= LoseHealth;
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 
@@ -104,7 +107,7 @@ public partial class Npc : CharacterBody3D
 	}
 	public void UpdateTargetLocation(Node3D target)
 	{
-		if (IsInstanceValid(_navAgent))
+		if (IsInstanceValid(_navAgent) && IsInstanceValid(target))
 		{
 			_navAgent.TargetPosition = target.GlobalTransform.Origin;
 		}

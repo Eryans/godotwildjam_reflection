@@ -28,7 +28,7 @@ public partial class Player : CharacterBody3D
 			}
 		}
 
-		if (IsInstanceValid(Camera))
+		if (IsInstanceValid(Camera) && _health.IsAlive())
 		{
 			var lookAtDirection = Camera.ShootRay() - GlobalTransform.Origin;
 			var targetRotation = Mathf.Atan2(lookAtDirection.X, lookAtDirection.Z);
@@ -48,5 +48,6 @@ public partial class Player : CharacterBody3D
 	private void PlayerDies()
 	{
 		GD.Print("You are dead, not big soorprize");
+		GlobalSignals.Instance.EmitPlayerDead();
 	}
 }

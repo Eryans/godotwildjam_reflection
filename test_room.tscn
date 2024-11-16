@@ -30,7 +30,7 @@ cell_height = 0.01
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Controller" type="Node" parent="." node_paths=PackedStringArray("Player")]
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("1_7j6fq")
 Player = NodePath("../Player")
 
@@ -101,5 +101,14 @@ layout_mode = 0
 offset_right = 234.0
 offset_bottom = 40.0
 text = "Score: x"
+
+[node name="GameOverText" type="RichTextLabel" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 458.0
+offset_top = 273.0
+offset_right = 692.0
+offset_bottom = 313.0
+text = "GAME OVER ! Press enter to restart !"
 
 [editable path="NavigationRegion3D/room_1"]

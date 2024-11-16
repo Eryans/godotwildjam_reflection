@@ -3,24 +3,34 @@ using System;
 
 public partial class Control : Godot.Control
 {
-	private RichTextLabel richTextLabel;
+	private RichTextLabel _richTextLabel;
+	private RichTextLabel _gameOverText;
 	private int Score = 0;
 	public override void _Ready()
 	{
-		richTextLabel = GetNode<RichTextLabel>("RichTextLabel");
+		_richTextLabel = GetNode<RichTextLabel>("RichTextLabel");
+		_gameOverText = GetNode<RichTextLabel>("GameOverText");
+
+		GlobalSignals.Instance.PlayerIsDead += OnPlayerDead;
 		GlobalSignals.Instance.NPCDies += OnNpcDies;
-		richTextLabel.Text = "Score : " + Score.ToString();
-	}
 
-	public override void _Process(double delta)
+		_gameOverText.Visible = false;
+		_richTextLabel.Text = "Score : " + Score.ToString();
+	}
+	public override void _ExitTree()
 	{
-
+		GlobalSignals.Instance.PlayerIsDead -= OnPlayerDead;
+		GlobalSignals.Instance.NPCDies -= OnNpcDies;
 	}
-
 	private void OnNpcDies(FireBall fireBall)
 	{
 		Score += 1;
 		GD.Print(Score);
-		richTextLabel.Text = "Score : " + Score.ToString();
+		_richTextLabel.Text = "Score : " + Score.ToString();
+	}
+
+	private void OnPlayerDead()
+	{
+		_gameOverText.Visible = true;
 	}
 }

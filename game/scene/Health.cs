@@ -23,6 +23,7 @@ public partial class Health : Node
 			EmitSignal(nameof(OnDies));
 		}
 	}
+	public bool IsAlive() { return _health > 0; }
 	public void LoseHealth(int damage = 1)
 	{
 		_health -= damage;
