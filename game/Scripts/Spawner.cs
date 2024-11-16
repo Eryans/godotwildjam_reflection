@@ -3,7 +3,7 @@ using Godot;
 public partial class Spawner : Path3D
 {
 	[Export]
-	public float SpawnRateTimerValue = 2.0f;
+	public float SpawnRateTimerValue = 5.0f;
 	private PackedScene _enemyNpc;
 	private Timer _spawnRateTimer = new();
 	public override void _Ready()
