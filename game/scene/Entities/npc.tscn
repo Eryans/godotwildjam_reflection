@@ -10,8 +10,8 @@ albedo_color = Color(0.96459, 0, 0.163514, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ivuil"]
 
 [node name="NPC" type="CharacterBody3D" groups=["npc"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 8)
 script = ExtResource("1_0t26i")
+Speed = 1.5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_mc3xl")

@@ -6,7 +6,7 @@ public partial class FireBall : CharacterBody3D
 	public float Speed = 15f;
 
 	[Export]
-	public int maxBounceBeforeDeath = 3;
+	public int maxBounceBeforeDeath = 10;
 	private Vector3 _direction;
 	public override void _Ready()
 	{
@@ -37,7 +37,6 @@ public partial class FireBall : CharacterBody3D
 			{
 				string npcName = cb.Name;
 				GlobalSignals.Instance.EmitNPCHitByProjectile(npcName);
-				QueueFree();
 			}
 			if (body is RigidBody3D rb)
 			{

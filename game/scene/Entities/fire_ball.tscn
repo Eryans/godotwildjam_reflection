@@ -7,10 +7,14 @@
 [sub_resource type="SphereMesh" id="SphereMesh_jq70i"]
 
 [node name="FireBall" type="CharacterBody3D"]
+axis_lock_linear_y = true
+axis_lock_angular_y = true
 motion_mode = 1
+wall_min_slide_angle = 3.14159
+platform_on_leave = 2
 script = ExtResource("1_kdk7t")
 Speed = 20.0
-maxBounceBeforeDeath = 4
+maxBounceBeforeDeath = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_dkjve")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjtbiig2ynddq"]
+
+[ext_resource type="Script" path="res://TopViewCamera.cs" id="1_6533b"]
+
+[sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_82mfq"]
+length = 0.001
+
+[node name="TopViewCamera" type="SpringArm3D" node_paths=PackedStringArray("Target")]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 3.63798e-11, 8.8935, 4.496)
+collision_mask = 0
+shape = SubResource("SeparationRayShape3D_82mfq")
+spring_length = 10.0
+script = ExtResource("1_6533b")
+Target = NodePath("")
+CameraLerpValue = 3.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44405, 5.38926)
+fov = 90.0

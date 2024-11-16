@@ -5,7 +5,7 @@ public partial class Controller : Node
 {
 	[Export]
 	public Player Player;
-	private float _speed = 5.0f;
+	private float _speed = 8.0f;
 
 	public override void _Ready()
 	{

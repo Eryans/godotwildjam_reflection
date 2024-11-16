@@ -4,7 +4,9 @@ using System;
 
 public partial class Npc : CharacterBody3D
 {
-	private int health = 5;
+	[Export]
+	public float Speed = 2.5f;
+	private int _health = 5;
 	private Array<Node3D> targets = new();
 	private NavigationAgent3D _navAgent;
 	private Node3D _currentTarget;
@@ -16,6 +18,14 @@ public partial class Npc : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		Vector3 velocity = Velocity;
+
+		if (!IsOnFloor())
+		{
+			velocity += GetGravity() * (float)delta;
+		}
+		Velocity = velocity;
+		MoveAndSlide();
 		if (IsInstanceValid(_currentTarget))
 		{
 			LookAt(_currentTarget.GlobalTransform.Origin);
@@ -80,8 +90,8 @@ public partial class Npc : CharacterBody3D
 		GD.Print("NPC HIT! ", npcName);
 		if (Name == npcName)
 		{
-			health -= 1;
-			if (health <= 0)
+			_health -= 1;
+			if (_health <= 0)
 			{
 				GlobalSignals.Instance.NPCHitByProjectile -= LoseHealth;
 				QueueFree();
