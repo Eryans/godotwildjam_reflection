@@ -26,6 +26,18 @@ public partial class Npc : CharacterBody3D
 		}
 		Velocity = velocity;
 		MoveAndSlide();
+
+		for (int i = 0; i < GetSlideCollisionCount(); i++)
+		{
+			KinematicCollision3D collision = GetSlideCollision(i);
+			var body = collision.GetCollider();
+			if (body is RigidBody3D rb)
+			{
+				Vector3 pushDirection = rb.GlobalTransform.Origin - GlobalTransform.Origin;
+				rb.ApplyCentralForce(pushDirection.Normalized() * 50);
+			}
+		}
+
 		if (IsInstanceValid(_currentTarget))
 		{
 			LookAt(_currentTarget.GlobalTransform.Origin);

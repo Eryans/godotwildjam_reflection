@@ -40,8 +40,8 @@ public partial class FireBall : CharacterBody3D
 			}
 			if (body is RigidBody3D rb)
 			{
-				Vector3 pushDirection = (rb.Transform.Origin - Transform.Origin).Normalized();
-				rb.ApplyCentralForce(pushDirection * 50);
+				Vector3 pushDirection = (rb.GlobalTransform.Origin - GlobalTransform.Origin).Normalized();
+				rb.ApplyCentralForce(pushDirection * 500);
 			}
 		}
 	}

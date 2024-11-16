@@ -18,7 +18,6 @@ public partial class TopViewCamera : SpringArm3D
 	{
 		Transform3D globalTransform = GlobalTransform;
 		globalTransform.Origin = globalTransform.Origin.Lerp(Target.GlobalTransform.Origin, CameraLerpValue * (float)delta);
-		// globalTransform.Origin = Target.GlobalTransform.Origin;
 		GlobalTransform = globalTransform;
 	}
 	public Vector3 ShootRay()
