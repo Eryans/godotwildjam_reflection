@@ -36,7 +36,7 @@ public partial class FireBall : CharacterBody3D
 			if (body is CharacterBody3D cb && cb.IsInGroup("npc"))
 			{
 				string npcName = cb.Name;
-				GlobalSignals.Instance.EmitNPCHitByProjectile(npcName);
+				GlobalSignals.Instance.EmitNPCHitByProjectile(npcName, this);
 			}
 			if (body is RigidBody3D rb)
 			{

@@ -8,7 +8,9 @@ public partial class GlobalSignals : Node
 	[Signal]
 	public delegate void ReflectBodyTriggerEventHandler(Area3D area3D);
 	[Signal]
-	public delegate void NPCHitByProjectileEventHandler(string npcName);
+	public delegate void NPCHitByProjectileEventHandler(string npcName, FireBall projectile);
+	[Signal]
+	public delegate void NPCDiesEventHandler(FireBall projectile);
 
 	public override void _Ready()
 	{
@@ -20,8 +22,13 @@ public partial class GlobalSignals : Node
 		EmitSignal(nameof(ReflectBodyTrigger), area3D);
 	}
 
-	public void EmitNPCHitByProjectile(string npcName)
+	public void EmitNPCHitByProjectile(string npcName, FireBall projectile)
 	{
-		EmitSignal(nameof(NPCHitByProjectile), npcName);
+		EmitSignal(nameof(NPCHitByProjectile), npcName, projectile);
+	}
+
+	public void EmitNPCDies(FireBall projectcile)
+	{
+		EmitSignal(nameof(NPCDies), projectcile);
 	}
 }

@@ -97,7 +97,7 @@ public partial class Npc : CharacterBody3D
 		}
 	}
 
-	private void LoseHealth(string npcName)
+	private void LoseHealth(string npcName, FireBall projectile)
 	{
 		if (Name == npcName)
 		{
@@ -105,6 +105,7 @@ public partial class Npc : CharacterBody3D
 			if (_health <= 0)
 			{
 				GlobalSignals.Instance.NPCHitByProjectile -= LoseHealth;
+				GlobalSignals.Instance.EmitNPCDies(projectile);
 				QueueFree();
 			}
 		}
