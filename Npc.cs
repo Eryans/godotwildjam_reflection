@@ -6,18 +6,31 @@ public partial class Npc : CharacterBody3D
 {
 	[Export]
 	public float Speed = 2.5f;
+	[Export]
+	public float AttackRate = 2.5f;
+	[Export]
+	public int Attack = 1;
 	private int _health = 5;
 	private Array<Node3D> targets = new();
 	private NavigationAgent3D _navAgent;
 	private Node3D _currentTarget;
+	private bool _canAttack = true;
+	private Timer _canAttackTimer = new();
+	private Area3D _attackZone;
 	public override void _Ready()
 	{
+		_attackZone = GetNode<Area3D>("DamageZone");
+		_attackZone.BodyEntered += OnBodyEnterDamageZone;
 		GlobalSignals.Instance.NPCHitByProjectile += LoseHealth;
+		_canAttackTimer.Timeout += OnAttackTimeout;
+		AddChild(_canAttackTimer);
+		_canAttackTimer.Start(AttackRate);
 		CallDeferred("SetupNavAgent");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+
 		Vector3 velocity = Velocity;
 
 		if (!IsOnFloor())
@@ -109,5 +122,18 @@ public partial class Npc : CharacterBody3D
 				QueueFree();
 			}
 		}
+	}
+	private void OnBodyEnterDamageZone(Node3D body)
+	{
+		if (body is Player && _canAttack)
+		{
+			_canAttack = false;
+			_canAttackTimer.Start(AttackRate);
+			GlobalSignals.Instance.EmitNpcAttack(Attack);
+		}
+	}
+	private void OnAttackTimeout()
+	{
+		_canAttack = true;
 	}
 }

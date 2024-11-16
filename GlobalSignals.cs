@@ -11,6 +11,8 @@ public partial class GlobalSignals : Node
 	public delegate void NPCHitByProjectileEventHandler(string npcName, FireBall projectile);
 	[Signal]
 	public delegate void NPCDiesEventHandler(FireBall projectile);
+	[Signal]
+	public delegate void NPCAttackEventHandler(int attack);
 
 	public override void _Ready()
 	{
@@ -30,5 +32,10 @@ public partial class GlobalSignals : Node
 	public void EmitNPCDies(FireBall projectcile)
 	{
 		EmitSignal(nameof(NPCDies), projectcile);
+	}
+
+	public void EmitNpcAttack(int attack)
+	{
+		EmitSignal(nameof(NPCAttack), attack);
 	}
 }

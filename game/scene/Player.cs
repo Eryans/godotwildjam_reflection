@@ -5,7 +5,13 @@ public partial class Player : CharacterBody3D
 	[Export]
 	TopViewCamera Camera;
 	public const float JumpVelocity = 4.5f;
-
+	private Health _health = new();
+	public override void _Ready()
+	{
+		AddChild(_health);
+		_health.OnDies += PlayerDies;
+		GlobalSignals.Instance.NPCAttack += OnBeingAttacked;
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 
@@ -30,5 +36,17 @@ public partial class Player : CharacterBody3D
 			gRotation.Y = Mathf.LerpAngle(Rotation.Y, targetRotation, 1);
 			GlobalRotation = gRotation;
 		}
+	}
+
+	private void OnBeingAttacked(int damage)
+	{
+		GD.Print("Player is being attacked !");
+		GD.Print("Player lose in HP: ", damage);
+		_health.LoseHealth(damage);
+	}
+
+	private void PlayerDies()
+	{
+		GD.Print("You are dead, not big soorprize");
 	}
 }
