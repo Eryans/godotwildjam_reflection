@@ -5,8 +5,6 @@ public partial class Controller : Node
 {
 	[Export]
 	public Player Player;
-	[Export]
-	public Camera3D Camera;
 	private float _speed = 5.0f;
 
 	public override void _Ready()
@@ -30,9 +28,6 @@ public partial class Controller : Node
 			velocity.Z = Mathf.MoveToward(Player.Velocity.Z, 0, _speed);
 		}
 
-		Transform3D cameraGlobalTransform = Camera.GlobalTransform;
-		cameraGlobalTransform.Origin.Z = Player.GlobalTransform.Origin.Z;
-		Camera.GlobalTransform = cameraGlobalTransform;
 		Player.Velocity = velocity;
 	}
 }
