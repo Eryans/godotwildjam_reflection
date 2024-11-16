@@ -19,8 +19,9 @@ public partial class ReflectHandler : Marker3D
 		{
 			_player = GetTree().Root.GetChild(1).GetNode<Player>("Player");
 			_reflection = (CharacterBody3D)_player.Duplicate();
+			_reflection.AddToGroup("player");
 			SetupReflectTransform(_player, _reflection);
-			GetTree().Root.CallDeferred("add_child", _reflection);
+			GetTree().Root.GetChild(1).CallDeferred("add_child", _reflection);
 		}
 
 	}

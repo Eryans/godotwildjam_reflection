@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://drrqv4kim5pgp"]
+
+[ext_resource type="Script" path="res://Npc.cs" id="1_0t26i"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mc3xl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vchum"]
+albedo_color = Color(0.96459, 0, 0.163514, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ivuil"]
+
+[node name="NPC" type="CharacterBody3D" groups=["npc"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 8)
+script = ExtResource("1_0t26i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_mc3xl")
+surface_material_override/0 = SubResource("StandardMaterial3D_vchum")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ivuil")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

@@ -9,6 +9,8 @@
 [node name="FireBall" type="CharacterBody3D"]
 motion_mode = 1
 script = ExtResource("1_kdk7t")
+Speed = 20.0
+maxBounceBeforeDeath = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_dkjve")

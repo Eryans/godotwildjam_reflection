@@ -7,6 +7,8 @@ public partial class GlobalSignals : Node
 
 	[Signal]
 	public delegate void ReflectBodyTriggerEventHandler(Area3D area3D);
+	[Signal]
+	public delegate void NPCHitByProjectileEventHandler(string npcName);
 
 	public override void _Ready()
 	{
@@ -16,5 +18,10 @@ public partial class GlobalSignals : Node
 	public void EmitReflectBodyTrigger(Area3D area3D)
 	{
 		EmitSignal(nameof(ReflectBodyTrigger), area3D);
+	}
+
+	public void EmitNPCHitByProjectile(string npcName)
+	{
+		EmitSignal(nameof(NPCHitByProjectile), npcName);
 	}
 }
