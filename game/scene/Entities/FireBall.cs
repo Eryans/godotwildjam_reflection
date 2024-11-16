@@ -2,12 +2,12 @@ using Godot;
 
 public partial class FireBall : CharacterBody3D
 {
-	private Vector3 _direction;
 	[Export]
 	public float Speed = 15f;
 
 	[Export]
 	public int maxBounceBeforeDeath = 3;
+	private Vector3 _direction;
 	public override void _Ready()
 	{
 		_direction = Transform.Basis.Z;

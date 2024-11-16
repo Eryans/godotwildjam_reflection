@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://ilk2tr0cqbr1"]
+[gd_scene load_steps=15 format=3 uid="uid://ilk2tr0cqbr1"]
 
 [ext_resource type="Script" path="res://Controller.cs" id="1_7j6fq"]
 [ext_resource type="PackedScene" uid="uid://cgv4burxdvsy0" path="res://game/scene/Entities/player.tscn" id="2_m14vn"]
-[ext_resource type="PackedScene" uid="uid://clggo26rtudot" path="res://game/scene/Managers/ReflectManager.tscn" id="3_ox7vu"]
 [ext_resource type="PackedScene" uid="uid://cl5kosycnd3s7" path="res://game/source/room_1.glb" id="4_op6pp"]
 [ext_resource type="Script" path="res://TopViewCamera.cs" id="4_uolp5"]
 [ext_resource type="PackedScene" uid="uid://drrqv4kim5pgp" path="res://game/scene/Entities/npc.tscn" id="6_djiso"]
@@ -32,17 +31,14 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Arr
 [node name="Controller" type="Node" parent="." node_paths=PackedStringArray("Player", "Camera")]
 script = ExtResource("1_7j6fq")
 Player = NodePath("../Player")
-Camera = NodePath("../ReflectManager/TopViewCamera")
+Camera = NodePath("../TopViewCamera")
 
 [node name="Player" parent="." node_paths=PackedStringArray("Camera") instance=ExtResource("2_m14vn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5194, 2.30289, 0)
-Camera = NodePath("../ReflectManager/TopViewCamera")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.13, 0)
+Camera = NodePath("../TopViewCamera")
 
-[node name="ReflectManager" parent="." instance=ExtResource("3_ox7vu")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.62396e-05, 3.722, -1)
-
-[node name="TopViewCamera" type="Camera3D" parent="ReflectManager"]
-transform = Transform3D(-4.37114e-08, 0.965926, -0.258819, 0, 0.258819, 0.965926, 1, 4.2222e-08, -1.13133e-08, -5.496, 11.278, -3.64798e-05)
+[node name="TopViewCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 3.63798e-11, 15, 4.496)
 script = ExtResource("4_uolp5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -96,6 +92,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.80039, 5, 8)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.50712, 5, 8)
 
 [node name="NPC3" parent="." instance=ExtResource("6_djiso")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.50712, 5, -5.34623)
-
-[editable path="ReflectManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.50712, 5, 8)
