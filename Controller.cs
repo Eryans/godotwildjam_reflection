@@ -7,16 +7,13 @@ public partial class Controller : Node
 	public Player Player;
 	private float _speed = 8.0f;
 
-	public override void _Ready()
-	{
-	}
 
 	public override void _Process(double delta)
 	{
 		Vector3 velocity = Player.Velocity;
 
 		Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-		Vector3 direction = /*Player.Transform.Basis */ new Vector3(inputDir.X, 0, inputDir.Y).Normalized();
+		Vector3 direction = new Vector3(inputDir.X, 0, inputDir.Y).Normalized();
 		if (direction != Vector3.Zero)
 		{
 			velocity.X = direction.X * _speed;

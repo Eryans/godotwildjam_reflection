@@ -30,14 +30,11 @@ public partial class Player : CharacterBody3D
 
 		if (IsInstanceValid(Camera))
 		{
-
 			var lookAtDirection = Camera.ShootRay() - GlobalTransform.Origin;
 			var targetRotation = Mathf.Atan2(lookAtDirection.X, lookAtDirection.Z);
 			Vector3 gRotation = GlobalRotation;
 			gRotation.Y = Mathf.LerpAngle(Rotation.Y, targetRotation, 1);
 			GlobalRotation = gRotation;
 		}
-
-
 	}
 }

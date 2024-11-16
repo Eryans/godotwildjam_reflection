@@ -87,7 +87,6 @@ public partial class Npc : CharacterBody3D
 
 	private void LoseHealth(string npcName)
 	{
-		GD.Print("NPC HIT! ", npcName);
 		if (Name == npcName)
 		{
 			_health -= 1;

@@ -20,7 +20,6 @@ public partial class Spawner : Path3D
 
 	private void OnTimeOut()
 	{
-		GD.Print("spawniing");
 		Npc mob = (Npc)_enemyNpc.Instantiate();
 		PathFollow3D mobSpawnLocation = GetNode<PathFollow3D>("PathFollow");
 		GetTree().Root.GetChild(1).AddChild(mob);
