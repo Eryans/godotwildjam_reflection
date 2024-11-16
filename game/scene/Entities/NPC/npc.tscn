@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://drrqv4kim5pgp"]
 
-[ext_resource type="Script" path="res://Npc.cs" id="1_0t26i"]
+[ext_resource type="Script" path="res://game/scene/Entities/NPC/Npc.cs" id="1_0t26i"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mc3xl"]
 

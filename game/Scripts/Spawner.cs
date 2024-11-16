@@ -11,7 +11,7 @@ public partial class Spawner : Path3D
 		_spawnRateTimer.Timeout += OnTimeOut;
 		AddChild(_spawnRateTimer);
 		_spawnRateTimer.Start(SpawnRateTimerValue);
-		_enemyNpc = GD.Load<PackedScene>("res://game/scene/Entities/npc.tscn");
+		_enemyNpc = GD.Load<PackedScene>("res://game/scene/Entities/NPC/npc.tscn");
 	}
 
 	public override void _Process(double delta)

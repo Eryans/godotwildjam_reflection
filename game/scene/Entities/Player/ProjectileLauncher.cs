@@ -10,7 +10,7 @@ public partial class ProjectileLauncher : Marker3D
 	private bool _canShoot = true;
 	public override void _Ready()
 	{
-		_projectile = GD.Load<PackedScene>("res://game/scene/Entities/fire_ball.tscn");
+		_projectile = GD.Load<PackedScene>("res://game/scene/Entities/Fireball/fire_ball.tscn");
 		_shootingRateTimer.Timeout += OnTimeOut;
 		AddChild(_shootingRateTimer);
 		_shootingRateTimer.Start(ShootingRate);

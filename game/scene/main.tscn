@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://b4lpbqtladpy1"]
 
-[ext_resource type="PackedScene" uid="uid://cgv4burxdvsy0" path="res://game/scene/Entities/player.tscn" id="1_r3gcx"]
+[ext_resource type="PackedScene" uid="uid://cgv4burxdvsy0" path="res://game/scene/Entities/Player/player.tscn" id="1_r3gcx"]
 [ext_resource type="PackedScene" uid="uid://clggo26rtudot" path="res://game/scene/Managers/ReflectManager.tscn" id="4_ibuwh"]
 [ext_resource type="PackedScene" uid="uid://bh0tmvmx5eeme" path="res://game/scene/levels/room_1.tscn" id="4_t6jri"]
 [ext_resource type="PackedScene" uid="uid://54lvr6ploi7a" path="res://game/source/map.glb" id="5_cocr5"]
 [ext_resource type="PackedScene" uid="uid://boa3sak2nblxy" path="res://game/scene/Tools/FollowCamera.tscn" id="5_umar1"]
-[ext_resource type="Script" path="res://game/scene/HideEditor.cs" id="6_nfkot"]
+[ext_resource type="Script" path="res://game/Scripts/HideEditor.cs" id="6_nfkot"]
 [ext_resource type="PackedScene" uid="uid://cu3wbveksbt0x" path="res://game/scene/Tools/room_teleport.tscn" id="7_a2f6e"]
 
 [sub_resource type="Environment" id="Environment_jua47"]

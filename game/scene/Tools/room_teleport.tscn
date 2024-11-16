@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cu3wbveksbt0x"]
 
-[ext_resource type="Script" path="res://RoomTeleport.cs" id="1_vbrci"]
+[ext_resource type="Script" path="res://game/Scripts/RoomTeleport.cs" id="1_vbrci"]
 [ext_resource type="ArrayMesh" uid="uid://drlgq43rbipgs" path="res://game/Meshes/props_Door.res" id="2_jvbs5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xm8u7"]

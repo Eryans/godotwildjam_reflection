@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjtbiig2ynddq"]
 
-[ext_resource type="Script" path="res://TopViewCamera.cs" id="1_6533b"]
+[ext_resource type="Script" path="res://game/scene/Tools/TopViewCamera.cs" id="1_6533b"]
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_82mfq"]
 length = 0.001

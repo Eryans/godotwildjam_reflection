@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://g00ai5b24lsi"]
 
-[ext_resource type="Script" path="res://CollisionTrigger.cs" id="1_g62ur"]
+[ext_resource type="Script" path="res://game/Scripts/CollisionTrigger.cs" id="1_g62ur"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_aiiwh"]
 radius = 1.40925

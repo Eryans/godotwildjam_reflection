@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dffq637od1it7"]
 
-[ext_resource type="Script" path="res://Spawner.cs" id="1_ff83v"]
+[ext_resource type="Script" path="res://game/Scripts/Spawner.cs" id="1_ff83v"]
 
 [sub_resource type="Curve3D" id="Curve3D_omqqd"]
 _data = {

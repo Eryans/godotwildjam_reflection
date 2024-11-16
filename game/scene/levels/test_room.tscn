@@ -1,11 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://ilk2tr0cqbr1"]
 
-[ext_resource type="Script" path="res://Controller.cs" id="1_7j6fq"]
-[ext_resource type="PackedScene" uid="uid://cgv4burxdvsy0" path="res://game/scene/Entities/player.tscn" id="2_m14vn"]
+[ext_resource type="Script" path="res://game/Scripts/Controller.cs" id="1_7j6fq"]
+[ext_resource type="PackedScene" uid="uid://cgv4burxdvsy0" path="res://game/scene/Entities/Player/player.tscn" id="2_m14vn"]
 [ext_resource type="PackedScene" uid="uid://cjtbiig2ynddq" path="res://game/scene/Tools/top_view_camera.tscn" id="3_1b0t2"]
 [ext_resource type="PackedScene" uid="uid://cl5kosycnd3s7" path="res://game/source/room_1.glb" id="4_op6pp"]
 [ext_resource type="PackedScene" uid="uid://dffq637od1it7" path="res://game/scene/Tools/spawner.tscn" id="5_iq5ye"]
-[ext_resource type="Script" path="res://Control.cs" id="6_4pu6s"]
+[ext_resource type="Script" path="res://game/Scripts/Control.cs" id="6_4pu6s"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_a1uf2"]
 
