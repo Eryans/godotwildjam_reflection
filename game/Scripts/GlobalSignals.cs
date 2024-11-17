@@ -16,6 +16,10 @@ public partial class GlobalSignals : Node
 	public delegate void NPCAttackEventHandler(int attack);
 	[Signal]
 	public delegate void PlayerIsDeadEventHandler();
+	[Signal]
+	public delegate void PlayerCanDashEventHandler(bool canDash);
+	[Signal]
+	public delegate void PlayerProjectileEventHandler(int max, int current);
 	public List<Npc> Npcs = new();
 	public List<FireBall> Projectiles = new();
 
@@ -47,5 +51,15 @@ public partial class GlobalSignals : Node
 	public void EmitPlayerDead()
 	{
 		EmitSignal(nameof(PlayerIsDead));
+	}
+
+	public void EmitCanDash(bool canDash)
+	{
+		EmitSignal(nameof(PlayerCanDash), canDash);
+	}
+
+	public void EmitPlayerProjectile(int max, int current)
+	{
+		EmitSignal(nameof(PlayerProjectile), max, current);
 	}
 }

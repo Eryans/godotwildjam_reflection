@@ -12,6 +12,7 @@ public partial class ProjectileLauncher : Marker3D
 	private bool _canShoot = true;
 	public override void _Ready()
 	{
+		GlobalSignals.Instance.EmitPlayerProjectile(MaxProjectile, GlobalSignals.Instance.Projectiles.Count);
 		_projectile = GD.Load<PackedScene>("res://game/scene/Entities/Fireball/fire_ball.tscn");
 		_shootingRateTimer.Timeout += OnTimeOut;
 		AddChild(_shootingRateTimer);
@@ -25,12 +26,12 @@ public partial class ProjectileLauncher : Marker3D
 			_canShoot = false;
 			if (GlobalSignals.Instance.Projectiles.Count < MaxProjectile)
 			{
-
 				CharacterBody3D instance = (CharacterBody3D)_projectile.Instantiate();
 				instance.GlobalTransform = GlobalTransform;
 				GetTree().Root.GetChild(1).AddChild(instance);
 				instance.GlobalBasis = GlobalBasis;
 				GlobalSignals.Instance.Projectiles.Add((FireBall)instance);
+				GlobalSignals.Instance.EmitPlayerProjectile(MaxProjectile, GlobalSignals.Instance.Projectiles.Count);
 			}
 		}
 	}

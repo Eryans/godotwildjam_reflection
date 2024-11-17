@@ -18,7 +18,7 @@ public partial class Controller : Node
 	public override void _Ready()
 	{
 		GlobalSignals.Instance.PlayerIsDead += OnPlayerDead;
-		_canDashTimer.Timeout += () => { _canDash = true; GD.Print("can dash activated"); };
+		_canDashTimer.Timeout += () => { _canDash = true; GlobalSignals.Instance.EmitCanDash(true); };
 		_dashDurationTimer.Timeout += () => { _speed = 8; };
 
 		AddChild(_canDashTimer);
@@ -35,6 +35,7 @@ public partial class Controller : Node
 				if (Input.IsActionJustPressed("ui_accept") && _canDash)
 				{
 					_canDash = false;
+					GlobalSignals.Instance.EmitCanDash(false);
 					_speed = 50;
 					_canDashTimer.Start(DashRate);
 					_dashDurationTimer.Start(DashDuration);

@@ -23,6 +23,8 @@ public partial class FireBall : CharacterBody3D
 		if (maxBounceBeforeDeath <= 0)
 		{
 			GlobalSignals.Instance.Projectiles.RemoveAll((projectile) => projectile.Name == Name);
+			GlobalSignals.Instance.EmitPlayerProjectile(10, GlobalSignals.Instance.Projectiles.Count);
+
 			QueueFree();
 		}
 		MoveAndSlide();
