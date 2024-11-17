@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class GlobalSignals : Node
 {
@@ -8,13 +9,15 @@ public partial class GlobalSignals : Node
 	[Signal]
 	public delegate void ReflectBodyTriggerEventHandler(Area3D area3D);
 	[Signal]
-	public delegate void NPCHitByProjectileEventHandler(string npcName, FireBall projectile);
+	public delegate void NPCHitByProjectileEventHandler(string npcName, int damage);
 	[Signal]
-	public delegate void NPCDiesEventHandler(FireBall projectile);
+	public delegate void NPCDiesEventHandler(int damage);
 	[Signal]
 	public delegate void NPCAttackEventHandler(int attack);
 	[Signal]
 	public delegate void PlayerIsDeadEventHandler();
+	public List<Npc> Npcs = new();
+	public List<FireBall> Projectiles = new();
 
 	public override void _Ready()
 	{
@@ -26,14 +29,14 @@ public partial class GlobalSignals : Node
 		EmitSignal(nameof(ReflectBodyTrigger), area3D);
 	}
 
-	public void EmitNPCHitByProjectile(string npcName, FireBall projectile)
+	public void EmitNPCHitByProjectile(string npcName, int damage)
 	{
-		EmitSignal(nameof(NPCHitByProjectile), npcName, projectile);
+		EmitSignal(nameof(NPCHitByProjectile), npcName, damage);
 	}
 
-	public void EmitNPCDies(FireBall projectcile)
+	public void EmitNPCDies(int damage)
 	{
-		EmitSignal(nameof(NPCDies), projectcile);
+		EmitSignal(nameof(NPCDies), damage);
 	}
 
 	public void EmitNpcAttack(int attack)

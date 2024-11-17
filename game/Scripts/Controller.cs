@@ -42,7 +42,6 @@ public partial class Controller : Node
 				if (Input.IsActionJustPressed("l_mouse") && _speed == 8 /* Means we're not dashing, ugly i know*/)
 				{
 					Player.GetNode<ProjectileLauncher>("ProjectileLauncher").Shoot();
-					Player.GetNode<ProjectileLauncher>("ProjectileLauncher2").Shoot();
 				}
 				Vector3 velocity = Player.Velocity;
 

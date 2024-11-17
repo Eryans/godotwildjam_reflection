@@ -5,6 +5,8 @@ public partial class ProjectileLauncher : Marker3D
 {
 	[Export]
 	public float ShootingRate = .5f;
+	[Export]
+	public int MaxProjectile = 10;
 	private PackedScene _projectile;
 	private Timer _shootingRateTimer = new();
 	private bool _canShoot = true;
@@ -21,10 +23,15 @@ public partial class ProjectileLauncher : Marker3D
 		if (_canShoot)
 		{
 			_canShoot = false;
-			CharacterBody3D instance = (CharacterBody3D)_projectile.Instantiate();
-			instance.GlobalTransform = GlobalTransform;
-			GetTree().Root.GetChild(1).AddChild(instance);
-			instance.GlobalBasis = GlobalBasis;
+			if (GlobalSignals.Instance.Projectiles.Count < MaxProjectile)
+			{
+
+				CharacterBody3D instance = (CharacterBody3D)_projectile.Instantiate();
+				instance.GlobalTransform = GlobalTransform;
+				GetTree().Root.GetChild(1).AddChild(instance);
+				instance.GlobalBasis = GlobalBasis;
+				GlobalSignals.Instance.Projectiles.Add((FireBall)instance);
+			}
 		}
 	}
 

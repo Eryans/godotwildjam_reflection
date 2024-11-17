@@ -113,15 +113,17 @@ public partial class Npc : CharacterBody3D
 		}
 	}
 
-	private void LoseHealth(string npcName, FireBall projectile)
+	private void LoseHealth(string npcName, int receivedDamage)
 	{
 		if (Name == npcName)
 		{
-			_health -= 1;
+			_health -= receivedDamage;
+			GD.Print("lost ", receivedDamage, " HP");
 			if (_health <= 0)
 			{
 				GlobalSignals.Instance.NPCHitByProjectile -= LoseHealth;
-				GlobalSignals.Instance.EmitNPCDies(projectile);
+				GlobalSignals.Instance.EmitNPCDies(receivedDamage);
+				GlobalSignals.Instance.Npcs.RemoveAll((mob) => mob.Name == npcName);
 				QueueFree();
 			}
 		}

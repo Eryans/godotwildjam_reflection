@@ -22,9 +22,9 @@ public partial class Control : Godot.Control
 		GlobalSignals.Instance.PlayerIsDead -= OnPlayerDead;
 		GlobalSignals.Instance.NPCDies -= OnNpcDies;
 	}
-	private void OnNpcDies(FireBall fireBall)
+	private void OnNpcDies(int damage)
 	{
-		Score += 1;
+		Score += damage;
 		GD.Print(Score);
 		_richTextLabel.Text = "Score : " + Score.ToString();
 	}

@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class Spawner : Path3D
 {
 	[Export]
 	public float SpawnRateTimerValue = 5.0f;
+	[Export]
+	public int MaxNpc = 50;
 	private PackedScene _enemyNpc;
 	private Timer _spawnRateTimer = new();
 	public override void _Ready()
@@ -20,11 +23,15 @@ public partial class Spawner : Path3D
 
 	private void OnTimeOut()
 	{
-		Npc mob = (Npc)_enemyNpc.Instantiate();
-		PathFollow3D mobSpawnLocation = GetNode<PathFollow3D>("PathFollow");
-		GetTree().Root.GetChild(1).AddChild(mob);
-		mobSpawnLocation.ProgressRatio = GD.Randf();
-		mob.GlobalPosition = mobSpawnLocation.GlobalPosition;
-		_spawnRateTimer.Start(SpawnRateTimerValue);
+		if (GlobalSignals.Instance.Npcs.Count < MaxNpc)
+		{
+			Npc mob = (Npc)_enemyNpc.Instantiate();
+			GlobalSignals.Instance.Npcs.Add(mob);
+			PathFollow3D mobSpawnLocation = GetNode<PathFollow3D>("PathFollow");
+			GetTree().Root.GetChild(1).AddChild(mob);
+			mobSpawnLocation.ProgressRatio = GD.Randf();
+			mob.GlobalPosition = mobSpawnLocation.GlobalPosition;
+			_spawnRateTimer.Start(SpawnRateTimerValue);
+		}
 	}
 }

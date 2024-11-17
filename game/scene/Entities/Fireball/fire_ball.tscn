@@ -13,8 +13,8 @@ motion_mode = 1
 wall_min_slide_angle = 3.14159
 platform_on_leave = 2
 script = ExtResource("1_kdk7t")
-Speed = 20.0
-maxBounceBeforeDeath = 5
+Speed = 17.5
+maxBounceBeforeDeath = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_dkjve")
