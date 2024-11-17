@@ -17,10 +17,13 @@ public partial class Npc : CharacterBody3D
 	private bool _canAttack = true;
 	private Timer _canAttackTimer = new();
 	private Area3D _attackZone;
+	private bool _isInAttackRange = false;
 	public override void _Ready()
 	{
 		_attackZone = GetNode<Area3D>("DamageZone");
 		_attackZone.BodyEntered += OnBodyEnterDamageZone;
+		_attackZone.BodyExited += OnBodyExitDamageZone;
+
 		GlobalSignals.Instance.NPCHitByProjectile += LoseHealth;
 		_canAttackTimer.Timeout += OnAttackTimeout;
 		AddChild(_canAttackTimer);
@@ -30,6 +33,15 @@ public partial class Npc : CharacterBody3D
 	public override void _ExitTree()
 	{
 		GlobalSignals.Instance.NPCHitByProjectile -= LoseHealth;
+	}
+	public override void _Process(double delta)
+	{
+		if (_isInAttackRange && _canAttack)
+		{
+			_canAttack = false;
+			_canAttackTimer.Start(AttackRate);
+			GlobalSignals.Instance.EmitNpcAttack(Attack);
+		}
 	}
 	public override void _PhysicsProcess(double delta)
 	{
@@ -130,11 +142,16 @@ public partial class Npc : CharacterBody3D
 	}
 	private void OnBodyEnterDamageZone(Node3D body)
 	{
-		if (body is Player && _canAttack)
+		if (body is Player)
 		{
-			_canAttack = false;
-			_canAttackTimer.Start(AttackRate);
-			GlobalSignals.Instance.EmitNpcAttack(Attack);
+			_isInAttackRange = true;
+		}
+	}
+	private void OnBodyExitDamageZone(Node3D body)
+	{
+		if (body is Player)
+		{
+			_isInAttackRange = false;
 		}
 	}
 	private void OnAttackTimeout()

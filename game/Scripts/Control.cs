@@ -27,6 +27,8 @@ public partial class Control : Godot.Control
 	{
 		GlobalSignals.Instance.PlayerIsDead -= OnPlayerDead;
 		GlobalSignals.Instance.NPCDies -= OnNpcDies;
+		GlobalSignals.Instance.PlayerCanDash -= OnPlayerCanDash;
+		GlobalSignals.Instance.PlayerProjectile -= OnPlayerProjectileChange;
 	}
 	private void OnNpcDies(int damage)
 	{

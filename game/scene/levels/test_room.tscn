@@ -88,7 +88,7 @@ offset_left = 208.0
 offset_top = 15.0
 offset_right = 321.0
 offset_bottom = 55.0
-text = "dash !"
+text = "Dash !"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vwtxv")

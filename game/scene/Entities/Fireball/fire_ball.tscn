@@ -1,10 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://xubllfkldcvw"]
+[gd_scene load_steps=7 format=3 uid="uid://xubllfkldcvw"]
 
 [ext_resource type="Script" path="res://game/scene/Entities/Fireball/FireBall.cs" id="1_kdk7t"]
+[ext_resource type="Material" uid="uid://cxqrvji0t75go" path="res://game/source/materials/fireball_mat.tres" id="2_m8y0l"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dkjve"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_jq70i"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4wlnb"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0.1, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xhpp0"]
+material = ExtResource("2_m8y0l")
+radius = 0.1
+height = 0.2
 
 [node name="FireBall" type="CharacterBody3D"]
 axis_lock_linear_y = true
@@ -20,5 +32,15 @@ maxBounceBeforeDeath = 7
 shape = SubResource("SphereShape3D_dkjve")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_m8y0l")
 mesh = SubResource("SphereMesh_jq70i")
 skeleton = NodePath("../..")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+lifetime = 3.0
+preprocess = 0.17
+speed_scale = 4.0
+randomness = 1.0
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_4wlnb")
+draw_pass_1 = SubResource("SphereMesh_xhpp0")
