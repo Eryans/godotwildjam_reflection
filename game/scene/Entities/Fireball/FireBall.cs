@@ -47,6 +47,7 @@ public partial class FireBall : CharacterBody3D
 			{
 				string npcName = cb.Name;
 				GlobalSignals.Instance.EmitNPCHitByProjectile(npcName, Damage);
+				Speed++;
 			}
 			if (body is RigidBody3D rb)
 			{

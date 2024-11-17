@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://djm8s26kmhhlk"
-path="res://.godot/imported/character.glb-a39f7c60bd9f530ecb8b32f27b2c8597.scn"
+uid="uid://c3ve6froa3svj"
+path="res://.godot/imported/badguy.glb-449dbd94e0983622756a452013d96d42.scn"
 
 [deps]
 
-source_file="res://game/source/character.glb"
-dest_files=["res://.godot/imported/character.glb-a39f7c60bd9f530ecb8b32f27b2c8597.scn"]
+source_file="res://game/source/badguy.glb"
+dest_files=["res://.godot/imported/badguy.glb-449dbd94e0983622756a452013d96d42.scn"]
 
 [params]
 
@@ -33,9 +33,9 @@ animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={
 "materials": {
-"Cylinder.001": {
+"Material": {
 "use_external/enabled": true,
-"use_external/path": "res://game/source/materials/Cylinder.001.tres"
+"use_external/path": "res://game/source/materials/Material.tres"
 }
 }
 }

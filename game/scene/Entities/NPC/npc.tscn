@@ -1,13 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://drrqv4kim5pgp"]
+[gd_scene load_steps=5 format=3 uid="uid://drrqv4kim5pgp"]
 
 [ext_resource type="Script" path="res://game/scene/Entities/NPC/Npc.cs" id="1_0t26i"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_mc3xl"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vchum"]
-albedo_color = Color(0.96459, 0, 0.163514, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_8bwdo"]
+[ext_resource type="PackedScene" uid="uid://c3ve6froa3svj" path="res://game/source/badguy.glb" id="2_cqbxl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ivuil"]
 
@@ -18,14 +12,8 @@ size = Vector3(1.97, 1.695, 0.93)
 script = ExtResource("1_0t26i")
 Speed = 1.5
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_mc3xl")
-surface_material_override/0 = SubResource("StandardMaterial3D_vchum")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.716257, 0, 0, 0, 0.421688, 0, 0, 0, 1, 0, 0.343947, -0.321516)
-mesh = SubResource("BoxMesh_8bwdo")
-surface_material_override/0 = SubResource("StandardMaterial3D_vchum")
+[node name="badguy2" parent="." instance=ExtResource("2_cqbxl")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_ivuil")

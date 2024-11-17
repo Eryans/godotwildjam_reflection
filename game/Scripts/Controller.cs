@@ -26,7 +26,7 @@ public partial class Controller : Node
 
 	}
 
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		if (IsInstanceValid(Player))
 		{
